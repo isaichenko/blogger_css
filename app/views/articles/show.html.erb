@@ -1,11 +1,20 @@
 <h1><%= @article.title %></h1>
-<p><%= @article.body %></p><br><br>
 
-<%= link_to "edit", edit_article_path(@article) %>&nbsp &nbsp
+<p>
+	Tags:
+	<% @article.tags.each do |tag| %>
+		<button><%= link_to tag.name, tag_path(tag) %></button>
+	<% end %>
+</p>
+<br>
 
-<%= link_to "delete", article_path(@article), method: :delete, data: {confirm: "Really deiete the article?"} %><br><br>
+<p><%= @article.body %></p><br>
 
-<%= link_to "<< Back to Articles List", articles_path %><br><br>
+<button><%= link_to "edit", edit_article_path(@article) %></button>&nbsp &nbsp
+
+<button><%= link_to "delete", article_path(@article), method: :delete, data: {confirm: "Really delete the article?"} %></button><br><br>
+
+<button><%= link_to "Back to Articles List", articles_path %></button><br><br>
 
 
 <h3>Comments (<%= @article.comments.size %>)</h3>
@@ -13,4 +22,4 @@
 
 <%= render partial: 'comments/form' %><br>
 
-<%= link_to "<< Back to Articles List", articles_path %>
+<button><%= link_to "Back to Articles List", articles_path %></button>
